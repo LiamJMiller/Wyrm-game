@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "../app.css";
 import "../styles/Wyrm.css";
 import Keypad from "./Keypad";
 
@@ -124,7 +123,7 @@ function Wyrm() {
     <div className="wyrm">
       {!gameStarted ? (
         <div className="wyrm-menu">
-          <h2 className="subtitle">Press Start to Play Snake</h2>
+          <h2 className="wyrm-text">Press Start to Play Snake</h2>
           <div className="wyrm-text">LeaderBoard</div>
           {localStorage.getItem("leaderboard") ? (
             JSON.parse(localStorage.getItem("leaderboard")).map(
