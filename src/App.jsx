@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import Wyrm from "./wyrm";
+import Wyrm from "./components/Wyrm";
 
 function App() {
   return (

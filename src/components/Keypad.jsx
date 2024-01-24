@@ -1,4 +1,4 @@
-import "./Keypad.css";
+import "../styles/Keypad.css";
 
 function Keypad({ onKeyPress }) {
   const keys = [

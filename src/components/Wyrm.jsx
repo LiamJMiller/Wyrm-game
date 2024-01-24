@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./app.css";
+import "../app.css";
+import "../styles/Wyrm.css";
 import Keypad from "./Keypad";
 
 const initialSnake = [
@@ -24,6 +25,9 @@ function Wyrm() {
   const [gameStarted, setGameStarted] = useState(false);
   const [score, setScore] = useState(0);
   const [food, setFood] = useState(getRandomPosition());
+  const [playerName, setPlayerName] = useState("");
+  const [showNameInput, setShowNameInput] = useState(false);
+  const [finalScore, setFinalScore] = useState(0);
 
   useEffect(() => {
     if (!gameStarted || gameOver) {
@@ -79,6 +83,25 @@ function Wyrm() {
     setDirection(initialDirection);
   };
 
+  useEffect(() => {
+    if (gameOver) {
+      setShowNameInput(true);
+      setFinalScore(score); // Set the final score when the game is over
+    }
+  }, [gameOver]);
+
+  const handleNameSubmit = (event) => {
+    event.preventDefault();
+    const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+    leaderboard.push({ name: playerName, score: finalScore }); // Use the final score here
+    leaderboard.sort((a, b) => b.score - a.score);
+    leaderboard.length = Math.min(leaderboard.length, 5); // Keep only top 5 scores
+    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+    setPlayerName(""); // Reset player's name
+    setScore(0); // Reset score
+    setShowNameInput(false);
+  };
+
   const changeDirection = (event) => {
     switch (event.key) {
       case "ArrowUp":
@@ -103,18 +126,55 @@ function Wyrm() {
         <div className="wyrm-menu">
           <h2 className="subtitle">Press Start to Play Snake</h2>
           <div className="wyrm-text">LeaderBoard</div>
+          {localStorage.getItem("leaderboard") ? (
+            JSON.parse(localStorage.getItem("leaderboard")).map(
+              (entry, index) => (
+                <div key={index}>
+                  {entry.name}: {entry.score}
+                </div>
+              )
+            )
+          ) : (
+            <div>No leaderboard data</div>
+          )}
           <button className="wyrm-button" onClick={startGame}>
             Start Game
           </button>
+        </div>
+      ) : showNameInput ? (
+        <div className="wyrm-menu">
+          <form onSubmit={handleNameSubmit}>
+            <input
+              type="text"
+              maxLength="3"
+              value={playerName}
+              onChange={(e) => setPlayerName(e.target.value.toUpperCase())}
+            />
+            <button type="submit">Submit</button>
+          </form>
         </div>
       ) : gameOver ? (
         <div className="wyrm-menu">
           <div className="wyrm-text">Game Over</div>
           <div className="wyrm-text">You scored : {score}</div>
+          <div className="wyrm-text">LeaderBoard</div>
+          {localStorage.getItem("leaderboard") ? (
+            JSON.parse(localStorage.getItem("leaderboard")).map(
+              (entry, index) => (
+                <div key={index}>
+                  {entry.name}: {entry.score}
+                </div>
+              )
+            )
+          ) : (
+            <div>No leaderboard data</div>
+          )}
           <button className="wyrm-button" onClick={startGame}>
             Try Again
           </button>
-          <button className="wyrm-button">return</button>
+          <button className="wyrm-button" onClick={() => setGameStarted(false)}>
+            return
+          </button>
         </div>
       ) : (
         <div tabIndex="0" onKeyDown={changeDirection}>
