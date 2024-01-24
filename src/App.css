@@ -33,6 +33,14 @@ body {
     -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
+/* Media query for screens smaller than 600px */
+@media (max-width: 600px) {
+  .title {
+    font-size: 3rem; /* reduce the font size */
+    /* add any other styles you want to change for smaller screens */
+  }
+}
+
 .subtitle {
   font-size: 2rem;
   color: #ffffff; /* white color */
