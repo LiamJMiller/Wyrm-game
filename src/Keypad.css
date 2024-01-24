@@ -1,0 +1,48 @@
+.keypad {
+  display: grid;
+  grid-template-areas:
+    "up up"
+    "left right"
+    "down down";
+  gap: 10px 60px; /* Increase gap */
+  place-items: center;
+  width: 200px; /* Increase width to accommodate larger gap */
+  margin: 1rem auto;
+}
+
+.keypad button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  color: white;
+  font-weight: bold;
+  /* box-shadow: 5px 5px 10px #b80000, -5px -5px 10px #ff0000; */
+}
+
+.keypad button:active {
+  background: linear-gradient(145deg, #ff0000, #ce0000);
+}
+
+button[data-key="Up"] {
+  grid-area: up;
+  background: linear-gradient(145deg, #ce0000, #ff0000); /* Red */
+}
+
+button[data-key="Down"] {
+  grid-area: down;
+  background: linear-gradient(145deg, #00ce00, #00ff00); /* Green */
+}
+
+button[data-key="Left"] {
+  grid-area: left;
+  background: linear-gradient(145deg, #0000ce, #0000ff); /* Blue */
+}
+
+button[data-key="Right"] {
+  grid-area: right;
+  background: linear-gradient(145deg, #cece00, #ffff00); /* Yellow */
+}

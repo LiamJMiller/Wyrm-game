@@ -1,8 +1,130 @@
-#root {
+@font-face {
+  font-family: "ArcadeClassic";
+  src: url("/assets/fonts/ArcadeClassic.TTF") format("truetype");
+}
+
+body {
+  background-color: black;
+  color: white;
+  font-family: "ArcadeClassic", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.app {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 4rem;
+  margin: 0.5rem 1rem;
+  color: #ffcc00; /* gold color */
+  text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+    -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.subtitle {
+  font-size: 2rem;
+  color: #ffffff; /* white color */
+  text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+    -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.wyrm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.wyrm-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.wyrm-text {
+  font-size: 2rem;
+  border: none;
+  border-radius: 5px;
+  color: #007bff;
+}
+
+.wyrm-button {
+  padding: 10px 20px;
+  margin-top: 20px;
+  font-size: 2rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.wyrm-button:hover {
+  background-color: #0056b3;
+}
+
+.wyrm-grid {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+  width: 400px;
+  height: 400px;
+  border: 1px solid #ccc;
+}
+
+.wyrm-cell {
+  border: 1px solid #ccc;
+}
+
+.wyrm-cell-white {
+  background-color: #fff;
+}
+
+.wyrm-cell-body {
+  background-color: #ffbb00;
+}
+
+.wyrm-cell-head {
+  background-color: #ffbb00;
+  border: 2px solid #ff5e00; /* Add a border */
+  position: relative; /* Add this to position the pseudo-elements */
+}
+
+.wyrm-cell-head::before,
+.wyrm-cell-head::after {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background-color: #000;
+  border-radius: 50%;
+}
+
+.wyrm-cell-head::before {
+  top: 30%;
+  left: 20%;
+}
+
+.wyrm-cell-head::after {
+  top: 30%;
+  right: 20%;
+}
+
+.wyrm-cell-red {
+  background-color: #f00;
 }
 
 .logo {
@@ -35,6 +157,8 @@
 
 .card {
   padding: 2em;
+  background-color: #222;
+  color: #fff;
 }
 
 .read-the-docs {
